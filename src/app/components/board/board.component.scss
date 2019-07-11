@@ -1,0 +1,36 @@
+$dimension: 25vw;
+
+.board {
+    margin: 60px auto;
+    width: $dimension;
+    height: $dimension;
+    display: grid;
+    grid-template-columns: 1fr 0.05fr 1fr 0.05fr 1fr;
+    grid-template-rows: 1fr 0.05fr 1fr 0.05fr 1fr;
+    grid-gap: 0;
+    align-items: center;
+    justify-items: center;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.board {
+    .delimiter {
+        background-color: lightgrey;
+        width: 100%;
+        height: 100%; 
+    }
+}
+
+.board {
+    .square {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 40px;
+        cursor: pointer;
+    }
+}

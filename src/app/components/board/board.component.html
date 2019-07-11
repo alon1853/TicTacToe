@@ -1,0 +1,11 @@
+<div class="board">
+    <div class="delimiter" style="grid-column: 2 / span 1; grid-row: 1 / span 5"></div>
+    <div class="delimiter" style="grid-column: 4 / span 1; grid-row: 1 / span 5"></div>
+    <div class="delimiter" style="grid-column: 1 / span 5; grid-row: 2 / span 1"></div>
+    <div class="delimiter" style="grid-column: 1 / span 5; grid-row: 4 / span 1"></div>
+
+    <app-square class="square" *ngFor="let square of squares; let i = index" [value]="square"
+        (click)="squareClicked(i)"></app-square>
+</div>
+
+<div class="current-player">Current Player: {{ currentPlayer | convertPlayer }}</div>
