@@ -1,5 +1,5 @@
 $dimension: 25vw;
-$smallerDimension: 10vw;
+$smallerDimension: 15vw;
 
 .board {
     margin: 60px auto;
@@ -13,7 +13,8 @@ $smallerDimension: 10vw;
     justify-items: center;
     box-sizing: border-box;
     user-select: none;
-    transition: all 1s;
+    transition: all .5s ease-in-out;
+    background-color: #fafafa;
 }
 
 .board {
@@ -37,5 +38,5 @@ $smallerDimension: 10vw;
 
 .smaller {
     width: $smallerDimension;
-    height: $smallerDimension
+    height: $smallerDimension;
 }
