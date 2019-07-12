@@ -1,4 +1,5 @@
 $dimension: 25vw;
+$smallerDimension: 10vw;
 
 .board {
     margin: 60px auto;
@@ -12,6 +13,7 @@ $dimension: 25vw;
     justify-items: center;
     box-sizing: border-box;
     user-select: none;
+    transition: all 1s;
 }
 
 .board {
@@ -20,9 +22,7 @@ $dimension: 25vw;
         width: 100%;
         height: 100%; 
     }
-}
 
-.board {
     .square {
         width: 100%;
         height: 100%;
@@ -33,4 +33,9 @@ $dimension: 25vw;
         font-size: 40px;
         cursor: pointer;
     }
+}
+
+.smaller {
+    width: $smallerDimension;
+    height: $smallerDimension
 }

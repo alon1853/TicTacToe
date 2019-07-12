@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { PlayerEnum } from 'src/app/enums/player.enum';
 
 @Component({
@@ -11,19 +11,75 @@ export class BoardComponent implements OnInit {
 
   squares: Array<number>;
   currentPlayer: number;
+  gameOver: boolean;
+
+  private readonly NUMBER_OF_SQUARES = 9;
+  private movesCounter: number;
 
   constructor() { }
 
   ngOnInit() {
-    this.squares = new Array<number>(9).fill(-1);
+    this.squares = new Array<number>(this.NUMBER_OF_SQUARES).fill(PlayerEnum.EMPTY);
     this.currentPlayer = this.getRandomStartPlayer();
+    this.movesCounter = 0;
+    this.gameOver = false;
   }
 
   squareClicked(index: number): void {
-    if (this.isSqaureEmpty(index)) {
+    if (!this.gameOver && this.isSqaureEmpty(index)) {
       this.squares[index] = this.currentPlayer;
-      this.currentPlayer = this.getNextPlayer();
+      this.movesCounter++;
+
+      if (!this.checkIfWinner() && !this.isTie()) {
+        this.currentPlayer = this.getNextPlayer();
+      } else {
+        this.movesCounter = 0;
+        this.endGame();
+      }
     }
+  }
+
+  restart(): void {
+    this.ngOnInit();
+  }
+
+  isTie(): boolean {
+    return this.movesCounter === this.NUMBER_OF_SQUARES;
+  }
+
+  checkIfWinner(): boolean {
+    // Check the rows
+    for (let i = 0; i <= 6; i += 3) {
+      if (this.squares[i] !== PlayerEnum.EMPTY &&
+        this.squares[i] === this.squares[i + 1] &&
+        this.squares[i] === this.squares[i + 2]) {
+        return true;
+      }
+    }
+
+    // Check the columns
+    for (let i = 0; i <= 2; i++) {
+      if (this.squares[i] !== PlayerEnum.EMPTY &&
+        this.squares[i] === this.squares[i + 3] &&
+        this.squares[i] === this.squares[i + 6]) {
+        return true;
+      }
+    }
+
+    // Check the diagonals
+    if (this.squares[0] !== PlayerEnum.EMPTY &&
+      this.squares[0] === this.squares[4] &&
+      this.squares[0] === this.squares[8]) {
+      return true;
+    }
+
+    if (this.squares[2] !== PlayerEnum.EMPTY &&
+      this.squares[2] === this.squares[4] &&
+      this.squares[2] === this.squares[6]) {
+      return true;
+    }
+
+    return false;
   }
 
   private getRandomStartPlayer(): number {
@@ -37,6 +93,10 @@ export class BoardComponent implements OnInit {
 
   private isSqaureEmpty(index: number): boolean {
     return this.squares[index] === -1;
+  }
+
+  private endGame(): void {
+    this.gameOver = true;
   }
 
 }

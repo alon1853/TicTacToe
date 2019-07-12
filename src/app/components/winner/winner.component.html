@@ -1,0 +1,13 @@
+<div class="container winner" *ngIf="!isTie; else tieBlock">
+    <span class="animate-toggle-font">🏆</span>
+    <span class="title">{{ ' ' + (lastPlayerName | convertPlayer) + ' is the winner!!' }}</span>
+    <span class="animate-toggle-font">🏆</span>
+</div>
+
+<ng-template #tieBlock>
+    <div class="container">
+        This is a tie!
+    </div>
+</ng-template>
+
+<button type="button" class="btn" (click)="restartClicked()">Start Again!</button>

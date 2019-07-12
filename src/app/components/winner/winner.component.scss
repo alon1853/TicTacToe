@@ -1,0 +1,32 @@
+$fontSize: 30pt;
+
+.container {
+    margin: 50px auto;
+    font-size: $fontSize;
+}
+
+.winner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 400px;
+    height: 55px;
+}
+
+.winner {
+    .title {
+        align-self: flex-end;
+    }
+}
+
+@keyframes toggle-font-size {
+    33% { font-size: $fontSize }
+    66% { font-size: 25pt }
+    100% { font-size: $fontSize }
+}
+
+.animate-toggle-font {
+    animation-name: toggle-font-size;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
