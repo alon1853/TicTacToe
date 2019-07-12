@@ -15,6 +15,7 @@ export class BoardComponent implements OnInit {
 
   private readonly NUMBER_OF_SQUARES = 9;
   private movesCounter: number;
+  private isThereWinner: boolean;
 
   constructor() { }
 
@@ -23,6 +24,7 @@ export class BoardComponent implements OnInit {
     this.currentPlayer = this.getRandomStartPlayer();
     this.movesCounter = 0;
     this.gameOver = false;
+    this.isThereWinner = false;
   }
 
   squareClicked(index: number): void {
@@ -30,10 +32,11 @@ export class BoardComponent implements OnInit {
       this.squares[index] = this.currentPlayer;
       this.movesCounter++;
 
-      if (!this.checkIfWinner() && !this.isTie()) {
+      this.isThereWinner = this.checkIfWinner();
+
+      if (!this.isThereWinner && !this.isTie()) {
         this.currentPlayer = this.getNextPlayer();
       } else {
-        this.movesCounter = 0;
         this.endGame();
       }
     }
@@ -44,7 +47,7 @@ export class BoardComponent implements OnInit {
   }
 
   isTie(): boolean {
-    return this.movesCounter === this.NUMBER_OF_SQUARES;
+    return !this.isThereWinner && this.movesCounter === this.NUMBER_OF_SQUARES;
   }
 
   checkIfWinner(): boolean {
